@@ -153,4 +153,22 @@ public class GildedRoseTest {
         assertSellin(9, 4);
     }
 
+    @Test
+    public void backstage_AddQuality_3_WhenSellin_Less_6() {
+        int days = 14;
+        items = new Item[] { new Item("+5 Dexterity Vest", 2, 10),
+                new Item("Elixir of the Mongoose", 2, 6),
+                new Item("Aged Brie", 2, 0),
+                new Item("Sulfuras, Hand of Ragnaros", 2, 80),
+                new Item("Backstage passes to a TAFKAL80ETC concert", 18, 1)
+        } ;
+        simulePassTime(days);
+        assertQuality(0, 0);
+        assertQuality(0, 1);
+        assertQuality(24, 2);
+        assertQuality(80, 3);
+        assertSellin(2,3);
+        assertQuality(19, 4);
+        assertSellin(5, 4);
+    }
 }
