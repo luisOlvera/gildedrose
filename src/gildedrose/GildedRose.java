@@ -5,8 +5,6 @@ package gildedrose;
  */
 class GildedRose {
 
-
-
     Item[] items;
 
     public GildedRose(final Item[] items) {

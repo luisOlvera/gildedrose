@@ -23,47 +23,31 @@ public class GildedRoseTest {
             // this conjured item does not work properly yet
             new Item("Conjured Mana Cake", 3, 6) };
 
-
-
-    @Test
-    public void testBasic2Dias() {
-        GildedRose app = new GildedRose(items);
-        int days = 2;
-        for (int i = 0; i < days; i++) {
-            System.out.println("-------- day " + i + " --------");
-            System.out.println("name, sellIn, quality");
-            for (Item item : items) {
-                System.out.println(item);
-            }
-            System.out.println();
-            app.updateQuality(i);
-        }
-
-    }
+    GildedRose app = null;
 
     @Test
     public void fechaCaducidadVencida_delQuality2(){
         int days = 2;
-        Item[] items = new Item[] { new Item("+5 Dexterity Vest", 0, 20),
+        items = new Item[] { new Item("+5 Dexterity Vest", 0, 20),
                 new Item("Elixir of the Mongoose", 0, 7)
-        }
-                ;
-        GildedRose app = new GildedRose(items);
+        }  ;
+         app = new GildedRose(items);
         for (int i = 0; i < days; i++) {
-            System.out.println("-------- day " + i + " --------");
-            System.out.println("name, sellIn, quality ,fechaVencimiento");
-            for (Item item : items) {
-                System.out.println(item);
-            }
-            System.out.println();
-           app.updateQuality(i);
+            app.updateQuality(i);
+            imprimirItems(i);
         }
-
         assertEquals(18 ,items[0].quality);
         assertEquals(5 ,items[1].quality);
     }
 
-
+    private void imprimirItems( int dia) {
+        System.out.println("-------- day " + dia + " --------");
+        System.out.println("name, sellIn, quality ,fechaVencimiento");
+        for (Item item : items) {
+            System.out.println(item);
+        }
+        System.out.println();
+    }
 
 
 }
