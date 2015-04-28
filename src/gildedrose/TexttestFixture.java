@@ -1,5 +1,7 @@
 package gildedrose;
 
+import java.util.Date;
+
 /**
  * Created by luisolvera on 27/04/15.
  */
