@@ -1,6 +1,5 @@
 package gildedrose;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -31,16 +30,21 @@ public class GildedRoseTest {
         items = new Item[] { new Item("+5 Dexterity Vest", 0, 20),
                 new Item("Elixir of the Mongoose", 0, 7)
         }  ;
-         app = new GildedRose(items);
+        simulePassTime(days);
+        assertQuality(18,0);
+        assertQuality(5,1);
+
+    }
+
+     private void simulePassTime(int days) {
+        app = new GildedRose(items);
         for (int i = 0; i < days; i++) {
             app.updateQuality(i);
             imprimirItems(i);
         }
-        assertEquals(18 ,items[0].quality);
-        assertEquals(5 ,items[1].quality);
     }
 
-    private void imprimirItems( int dia) {
+    private void imprimirItems(int dia) {
         System.out.println("-------- day " + dia + " --------");
         System.out.println("name, sellIn, quality ,fechaVencimiento");
         for (Item item : items) {
@@ -49,19 +53,21 @@ public class GildedRoseTest {
         System.out.println();
     }
 
+    private void assertQuality(int qualityExpected, int itemToQuality) {
+        assertEquals(qualityExpected ,items[itemToQuality].quality);
+    }
+
     @Test
     public void neverNegativeQuality() {
         int days = 6;
         items = new Item[] { new Item("+5 Dexterity Vest", 0, 10),
                 new Item("Elixir of the Mongoose", 0, 6)
-        }  ;
-        app = new GildedRose(items);
-        for (int i = 0; i < days; i++) {
-            app.updateQuality(i);
-            imprimirItems(i);
-        }
-        assertEquals(0 ,items[0].quality);
-        assertEquals(0 ,items[1].quality);
+        } ;
+        simulePassTime(days);
+        assertQuality(0, 0);
+        assertQuality(0, 1);
     }
+
+
 
 }
