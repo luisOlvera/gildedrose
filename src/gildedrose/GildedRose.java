@@ -45,9 +45,12 @@ class GildedRose {
 
     private void delQuality(int i) {
         int degradeQuality=0;
-        if (items[i].quality > 0)
-            if (!is_NameSulfuras(i) )
-                  degradeQuality =1;
+        if (items[i].quality > 0) {
+            if (!is_NameSulfuras(i))
+                degradeQuality = 1;
+            if (is_NameConjured(i))
+                degradeQuality =2;
+        }
        if (isSellInOut(i) && is_NameBackstagePasses(i))
                    degradeQuality=items[i].quality;
 
@@ -73,6 +76,9 @@ class GildedRose {
 
     }
 
+    private boolean is_NameConjured(int i) {
+        return items[i].name.equals("Conjured Mana Cake");
+    }
     private boolean is_DownLimitQuality(int i) {
         return items[i].quality < 50;
     }
