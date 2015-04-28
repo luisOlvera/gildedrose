@@ -115,4 +115,24 @@ public class GildedRoseTest {
         assertEquals(sellInExpected ,items[itemToCompare].sellIn);
     }
 
+    @Test
+    public void backstage_AddQuality_1_WhenSellin_More_10() {
+        int days = 9;
+        items = new Item[] { new Item("+5 Dexterity Vest", 2, 10),
+                new Item("Elixir of the Mongoose", 2, 6),
+                new Item("Aged Brie", 2, 0),
+                new Item("Sulfuras, Hand of Ragnaros", 2, 80),
+                new Item("Backstage passes to a TAFKAL80ETC concert", 18, 1)
+        } ;
+        simulePassTime(days);
+        assertQuality(0, 0);
+        assertQuality(0, 1);
+        assertQuality(14, 2);
+        assertQuality(80, 3);
+        assertSellin(2,3);
+        assertQuality(9, 4);
+        assertSellin(10, 4);
+    }
+
+
 }
