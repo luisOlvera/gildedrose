@@ -49,5 +49,19 @@ public class GildedRoseTest {
         System.out.println();
     }
 
+    @Test
+    public void neverNegativeQuality() {
+        int days = 6;
+        items = new Item[] { new Item("+5 Dexterity Vest", 0, 10),
+                new Item("Elixir of the Mongoose", 0, 6)
+        }  ;
+        app = new GildedRose(items);
+        for (int i = 0; i < days; i++) {
+            app.updateQuality(i);
+            imprimirItems(i);
+        }
+        assertEquals(0 ,items[0].quality);
+        assertEquals(0 ,items[1].quality);
+    }
 
 }
