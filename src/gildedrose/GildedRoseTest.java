@@ -160,7 +160,7 @@ public class GildedRoseTest {
                 new Item("Elixir of the Mongoose", 2, 6),
                 new Item("Aged Brie", 2, 0),
                 new Item("Sulfuras, Hand of Ragnaros", 2, 80),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 18, 1)
+                new Item("Backstage passes to a TAFKAL80ETC concert", 18, 1),
         } ;
         simulePassTime(days);
         assertQuality(0, 0);
@@ -170,5 +170,17 @@ public class GildedRoseTest {
         assertSellin(2,3);
         assertQuality(19, 4);
         assertSellin(5, 4);
+    }
+
+    @Test
+    public void conjured_2_DegradeByday() {
+        int days = 3;
+        items = new Item[] { new Item("+5 Dexterity Vest", 2, 10),
+                                new Item("Conjured Mana Cake", 20, 50)
+        } ;
+        simulePassTime(days);
+        assertQuality(8, 0);
+        assertQuality(46, 1);
+
     }
 }

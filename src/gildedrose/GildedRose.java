@@ -18,30 +18,12 @@ class GildedRose {
                         && !is_NameBackstagePasses(i)) {
                     delQuality(i);
                 } else {
-                    if (is_DownLimitQuality(i)) {
-                        items[i].quality = items[i].quality + 1;
-
-                        if (is_NameBackstagePasses(i)) {
-                            if (items[i].sellIn < 11) {
-                                addQuality(i);
-                            }
-
-                            if (items[i].sellIn < 6) {
-                                addQuality(i);
-                            }
-                        }
-                    }
+                    addQuality( i);
                 }
-
                 del_SellIn(i);
-
                 if (isSellInOut(i)) {
                     if (!isNameAged_Brie(i)) {
-                        if (!is_NameBackstagePasses(i)) {
                             delQuality(i);
-                        } else {
-                            qualityConvert0(i);
-                        }
                     } else {
                         addQuality(i);
                     }
@@ -50,9 +32,6 @@ class GildedRose {
         }
     }
 
-    private void qualityConvert0(int i) {
-        items[i].quality = 0;
-    }
 
     private boolean isSellInOut(int i) {
         return items[i].sellIn < 0;
@@ -65,18 +44,33 @@ class GildedRose {
     }
 
     private void delQuality(int i) {
-        if (items[i].quality > 0) {
-            if (!is_NameSulfuras(i)) {
-                items[i].quality = items[i].quality - 1;
-            }
-        }
+        int degradeQuality=0;
+        if (items[i].quality > 0)
+            if (!is_NameSulfuras(i) )
+                  degradeQuality =1;
+       if (isSellInOut(i) && is_NameBackstagePasses(i))
+                   degradeQuality=items[i].quality;
+
+        items[i].quality -= degradeQuality;
     }
 
     private void addQuality(int i) {
+        int valorQuality=1;
         if (is_DownLimitQuality(i)) {
-            items[i].quality = items[i].quality + 1;
-
+            if (is_NameBackstagePasses(i))
+                valorQuality+= addBonusQualityToBackstage(i);
+            items[i].quality = items[i].quality + valorQuality;
         }
+    }
+
+    private int addBonusQualityToBackstage(int i) {
+        int bonusQuality =0;
+        if (items[i].sellIn < 11)
+            bonusQuality= 1;
+        if (items[i].sellIn < 6)
+            bonusQuality= 2;
+        return bonusQuality;
+
     }
 
     private boolean is_DownLimitQuality(int i) {
