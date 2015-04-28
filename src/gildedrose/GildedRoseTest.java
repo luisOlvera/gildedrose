@@ -36,7 +36,7 @@ public class GildedRoseTest {
                 System.out.println(item);
             }
             System.out.println();
-            app.updateQuality();
+            app.updateQuality(i);
         }
 
     }
@@ -56,7 +56,7 @@ public class GildedRoseTest {
                 System.out.println(item);
             }
             System.out.println();
-           app.updateQuality();
+           app.updateQuality(i);
         }
 
         assertEquals(18 ,items[0].quality);

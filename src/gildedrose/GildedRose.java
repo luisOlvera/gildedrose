@@ -13,40 +13,42 @@ class GildedRose {
         this.items = items;
     }
 
-    public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            if (!isNameAged_Brie(i)
-                    && !is_NameBackstagePasses(i)) {
-                delQuality(i);
-            } else {
-                if (is_limitQuality(i)) {
-                    items[i].quality = items[i].quality + 1;
+    public void updateQuality( int days) {
+        if (days>0) {
+            for (int i = 0; i < items.length; i++) {
+                if (!isNameAged_Brie(i)
+                        && !is_NameBackstagePasses(i)) {
+                    delQuality(i);
+                } else {
+                    if (is_limitQuality(i)) {
+                        items[i].quality = items[i].quality + 1;
 
-                    if (is_NameBackstagePasses(i)) {
-                        if (items[i].sellIn < 11) {
-                            addQuality(i);
-                        }
+                        if (is_NameBackstagePasses(i)) {
+                            if (items[i].sellIn < 11) {
+                                addQuality(i);
+                            }
 
-                        if (items[i].sellIn < 6) {
-                            addQuality(i);
+                            if (items[i].sellIn < 6) {
+                                addQuality(i);
+                            }
                         }
                     }
                 }
-            }
 
-            if (!is_NameSulfuras(i)) {
-                items[i].sellIn = items[i].sellIn - 1;
-            }
+                if (!is_NameSulfuras(i)) {
+                    items[i].sellIn = items[i].sellIn - 1;
+                }
 
-            if (items[i].sellIn < 0) {
-                if (!isNameAged_Brie(i)) {
-                    if (!is_NameBackstagePasses(i)) {
-                        delQuality(i);
+                if (items[i].sellIn < 0) {
+                    if (!isNameAged_Brie(i)) {
+                        if (!is_NameBackstagePasses(i)) {
+                            delQuality(i);
+                        } else {
+                            items[i].quality = items[i].quality - items[i].quality;
+                        }
                     } else {
-                        items[i].quality = items[i].quality - items[i].quality;
+                        addQuality(i);
                     }
-                } else {
-                    addQuality(i);
                 }
             }
         }
