@@ -18,7 +18,7 @@ class GildedRose {
                         && !is_NameBackstagePasses(i)) {
                     delQuality(i);
                 } else {
-                    if (is_limitQuality(i)) {
+                    if (is_DownLimitQuality(i)) {
                         items[i].quality = items[i].quality + 1;
 
                         if (is_NameBackstagePasses(i)) {
@@ -33,22 +33,34 @@ class GildedRose {
                     }
                 }
 
-                if (!is_NameSulfuras(i)) {
-                    items[i].sellIn = items[i].sellIn - 1;
-                }
+                del_SellIn(i);
 
-                if (items[i].sellIn < 0) {
+                if (isSellInOut(i)) {
                     if (!isNameAged_Brie(i)) {
                         if (!is_NameBackstagePasses(i)) {
                             delQuality(i);
                         } else {
-                            items[i].quality = items[i].quality - items[i].quality;
+                            qualityConvert0(i);
                         }
                     } else {
                         addQuality(i);
                     }
                 }
             }
+        }
+    }
+
+    private void qualityConvert0(int i) {
+        items[i].quality = 0;
+    }
+
+    private boolean isSellInOut(int i) {
+        return items[i].sellIn < 0;
+    }
+
+    private void del_SellIn(int i) {
+        if (!is_NameSulfuras(i)) {
+            items[i].sellIn = items[i].sellIn - 1;
         }
     }
 
@@ -61,12 +73,13 @@ class GildedRose {
     }
 
     private void addQuality(int i) {
-        if (is_limitQuality(i)) {
+        if (is_DownLimitQuality(i)) {
             items[i].quality = items[i].quality + 1;
+
         }
     }
 
-    private boolean is_limitQuality(int i) {
+    private boolean is_DownLimitQuality(int i) {
         return items[i].quality < 50;
     }
 
