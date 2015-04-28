@@ -94,6 +94,25 @@ public class GildedRoseTest {
         assertQuality(50, 2);
     }
 
+    @Test
+    public void sulfuras_neverChange() {
+        int days = 30;
+        items = new Item[] { new Item("+5 Dexterity Vest", 2, 10),
+                new Item("Elixir of the Mongoose", 2, 6),
+                new Item("Aged Brie", 2, 0),
+                new Item("Sulfuras, Hand of Ragnaros", 2, 80),
+        } ;
+        simulePassTime(days);
+        assertQuality(0, 0);
+        assertQuality(0, 1);
+        assertQuality(50, 2);
+        assertQuality(80, 3);
+        assertSellin(2,3);
 
+    }
+
+    private void assertSellin(int sellInExpected, int itemToCompare) {
+        assertEquals(sellInExpected ,items[itemToCompare].sellIn);
+    }
 
 }
